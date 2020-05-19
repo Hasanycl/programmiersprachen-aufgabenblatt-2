@@ -1,6 +1,7 @@
 #define CATCH_CONFIG_RUNNER
 #include <catch.hpp>
 #include "vec2.hpp"
+#include "mat2.hpp"
 
 TEST_CASE("describeVec2Tests", "{Vec2}")
 {
@@ -99,6 +100,38 @@ TEST_CASE("operator *_args_in_different_order", "{Vec2}")
 	c = b * a;
 	REQUIRE(c.x == Approx(18.0f));
 	REQUIRE(c.y == Approx(12.0f));
+}
+
+TEST_CASE("operator *=_matrix", "{Mat2}")
+{
+	Mat2 s;
+	Mat2 d{ 2.0f , 1.0f , 2.0f , 8.0f };
+	Mat2 c{ 3.0f , 2.0f , 4.0f , 3.0f };
+	s *= d;
+	
+	REQUIRE(s.e_00 == Approx(2.0f));
+	REQUIRE(s.e_10 == Approx(1.0f));
+	REQUIRE(s.e_01 == Approx(2.0f));
+	REQUIRE(s.e_11 == Approx(8.0f));
+
+	d *= c;
+	REQUIRE(d.e_00 == Approx(10.0f));
+	REQUIRE(d.e_10 == Approx(7.0f));
+	REQUIRE(d.e_01 == Approx(38.0f));
+	REQUIRE(d.e_11 == Approx(28.0f));
+}
+
+TEST_CASE("operator *_two_matrices" , "{Mat2}")
+{
+
+	Mat2 m1{ 2.0f , 3.0f , 2.0f , 1.0f };
+	Mat2 m2{ 3.0f , 2.0f , 4.0f , 2.0f };
+	Mat2 m3;
+	m3 = m1 * m2;
+	REQUIRE(m3.e_00 == Approx(18.0f));
+	REQUIRE(m3.e_10 == Approx(10.0f));
+	REQUIRE(m3.e_01 == Approx(10.0f));
+	REQUIRE(m3.e_11 == Approx(6.0f));
 }
 
 int main(int argc, char *argv[])
