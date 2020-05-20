@@ -2,6 +2,11 @@
 #include <catch.hpp>
 #include "vec2.hpp"
 #include "mat2.hpp"
+#define _USE_MATH_DEFINES
+#include <math.h>
+
+
+
 
 TEST_CASE("describeVec2Tests", "{Vec2}")
 {
@@ -133,6 +138,63 @@ TEST_CASE("operator *_two_matrices" , "{Mat2}")
 	REQUIRE(m3.e_01 == Approx(10.0f));
 	REQUIRE(m3.e_11 == Approx(6.0f));
 }
+
+
+TEST_CASE("determinant_of_matrix" , "{Mat2}")
+{
+
+	Mat2 m1{ 2.0f , 3.0f , 2.0f , 1.0f };
+	REQUIRE(m1.det() == Approx(-4.0f));
+}
+
+TEST_CASE("Matrix_Vector_Multiplication", "{Mat2}")
+{
+	Vec2 a;
+	Mat2 m1{ 2.0f , 3.0f , 2.0f , 1.0f };
+	Vec2 b{ 2.0f , 3.0f };
+	a = m1 * b;
+	REQUIRE(a.x == Approx(13.0f));
+	REQUIRE(a.y == Approx(7.0f));
+}
+
+TEST_CASE("Inverse_Matrix", "{Mat2}")
+{
+	Mat2 m1{ 2.0f , 3.0f , 2.0f , 1.0f };
+	Mat2 m2 = inverse(m1);
+
+	REQUIRE( m2.e_00 == Approx(-0.25f));
+	REQUIRE( m2.e_01 == Approx(0.5f));
+	REQUIRE( m2.e_10 == Approx(0.75f));
+	REQUIRE(m2.e_11 == Approx(-0.5f));
+} 
+
+TEST_CASE("Transpose_Matrix", "{Mat2}")
+{
+	Mat2 m1{ 2.0f , 3.0f , 5.0f , 1.0f };
+	Mat2 m2 = transpose(m1);
+
+	REQUIRE(m2.e_00 == Approx(2.0f));
+	REQUIRE(m2.e_01 == Approx(3.0f));
+	REQUIRE(m2.e_10 == Approx(5.0f));
+	REQUIRE(m2.e_11 == Approx(1.0f));
+}
+
+TEST_CASE("Rotation_Matrix", "{Mat2}")
+{
+	Mat2 x;
+	float phi = M_PI; //180 degrees
+	x = make_rotation_mat2(phi);
+	REQUIRE(x.e_00 == Approx(-0.59846f));
+	REQUIRE(x.e_10 == Approx(0.80115f));
+	REQUIRE(x.e_01 == Approx(-0.80115f));
+	REQUIRE(x.e_11 == Approx(-0.59846f));
+}
+
+
+
+
+
+
 
 int main(int argc, char *argv[])
 {
