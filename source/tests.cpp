@@ -4,7 +4,7 @@
 #include "mat2.hpp"
 #define _USE_MATH_DEFINES
 #include <math.h>
-
+#include "color.hpp"
 
 
 
@@ -189,6 +189,16 @@ TEST_CASE("Rotation_Matrix", "{Mat2}")
 	REQUIRE(x.e_01 == Approx(-0.80115f));
 	REQUIRE(x.e_11 == Approx(-0.59846f));
 }
+
+TEST_CASE("Color_RGB", "{Color}")
+{
+	Color a{ 0.23 , 0.56 , 0.87 };
+
+	REQUIRE(a.r == Approx(0.23f));
+	REQUIRE(a.g == Approx(0.56f));
+	REQUIRE(a.b == Approx(0.87f));
+}
+	
 
 
 
