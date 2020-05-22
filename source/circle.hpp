@@ -12,9 +12,9 @@ class Circle
 	  
 		 Circle();
 
-
-
 	     Circle(Vec2 const& center, float radius);
+
+		 float circumference() const ;
 
 
 
