@@ -11,12 +11,11 @@ class Rect
 
     public:
 
-	   Rect();
+		Rect();
 
+	    Rect(Vec2 const& min, Vec2 const& max);
 
-
-	   Rect(Vec2 const& min, Vec2 const& max);
-
+		float circumference_rect () const;
 
 };
 
