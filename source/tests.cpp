@@ -5,7 +5,8 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include "color.hpp"
-
+#include "rect.hpp"
+#include "circle.hpp"
 
 
 TEST_CASE("describeVec2Tests", "{Vec2}")
@@ -192,17 +193,28 @@ TEST_CASE("Rotation_Matrix", "{Mat2}")
 
 TEST_CASE("Color_RGB", "{Color}")
 {
-	Color a{ 0.23 , 0.56 , 0.87 };
+	Color c{ 0.32f , 0.76f , 0.44f };
 
-	REQUIRE(a.r == Approx(0.23f));
-	REQUIRE(a.g == Approx(0.56f));
-	REQUIRE(a.b == Approx(0.87f));
+	REQUIRE(c.r == Approx(0.32f));
+	REQUIRE(c.g == Approx(0.76f));
+	REQUIRE(c.b == Approx(0.44f));
 }
+
+TEST_CASE("Rectangle Circumference", "{Rect}")
+{
+	Rect a{ {2.0f , 3.0f} , {4.0f , 5.0f} };
+
+	REQUIRE(a.circumference_rect() == Approx(8.0f));
+
+}
+TEST_CASE("Circle Circumference", "{Circle}")
+{
+	Circle c{ {2.0f , 3.0f} , 6.0f };
+
+	REQUIRE(c.circumference() == Approx(12.0f * M_PI));
+}
+
 	
-
-
-
-
 
 
 
