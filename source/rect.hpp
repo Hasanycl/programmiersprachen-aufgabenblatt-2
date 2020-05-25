@@ -2,6 +2,7 @@
 #define RECT_HPP
 #include "vec2.hpp"
 #include "color.hpp"
+#include "window.hpp"
 
 
 class Rect
@@ -18,6 +19,8 @@ class Rect
 	    Rect(Vec2 const& min, Vec2 const& max , Color const& color);
 
 		float circumference_rect () const;
+
+		void draw(Window const& win) const;
 
 };
 
