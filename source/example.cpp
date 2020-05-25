@@ -1,12 +1,16 @@
 #include "window.hpp"
+#include "rect.hpp"
+#include "circle.hpp"
 #include <GLFW/glfw3.h>
 #include <utility>
 #include <cmath>
 
-
 int main(int argc, char* argv[])
 {
   Window win{std::make_pair(800,800)};
+
+  Circle c5{ {400.0f,400.0f} , {90.0f }, { 0.5f , 0.3f , 0.4f }};
+  Rect rect1{ {300.0f , 300.0f}, {200.0f, 200.0f}, {0.2f, 0.2f, 0.4f} };
 
   while (!win.should_close()) {
     if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -51,6 +55,9 @@ int main(int argc, char* argv[])
     unsigned int font_size = 35;
     
     win.draw_text(text_offset_x, text_offset_y, font_size, display_text);
+
+    c5.draw(win);
+    rect1.draw(win);
 
     win.update();
   }
