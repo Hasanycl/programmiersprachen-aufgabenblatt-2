@@ -202,16 +202,40 @@ TEST_CASE("Color_RGB", "{Color}")
 
 TEST_CASE("Rectangle Circumference", "{Rect}")
 {
-	Rect a{ {2.0f , 3.0f} , {4.0f , 5.0f} };
+	Rect a{ {2.0f , 3.0f} , {4.0f , 5.0f} , {0.1f , 0.2f , 0.3f} };
 
 	REQUIRE(a.circumference_rect() == Approx(8.0f));
 
 }
 TEST_CASE("Circle Circumference", "{Circle}")
 {
-	Circle c{ {2.0f , 3.0f} , 6.0f };
+	Circle c{ {2.0f , 3.0f} , 6.0f , {0.2f , 0.3f , 0.5f} };
 
 	REQUIRE(c.circumference() == Approx(12.0f * M_PI));
+}
+
+
+
+TEST_CASE("is_inside_Circle", "{Circle}")
+{
+	Circle c{ {2.0f,2.0f} ,4.0f, {0.1f,0.2f,0.3f} };
+	Vec2 point1{ 2.1f, 3.2f };
+	bool b = c.is_inside(point1);
+	REQUIRE(b == true);
+	Vec2 point2{ 30.0f , 25.0f };
+	bool d = c.is_inside(point2);
+	REQUIRE(d == false);
+
+}
+TEST_CASE("is_inside_Rectangle" "{Rectangle}")
+{
+	Rect rect1{ {150.0f, 250.0f}, {260.0f, 360.0f}, {0.8f, 0.1f, 0.4f} };
+	Vec2 point1{ 100.0f, 200.0f };
+	bool a = rect1.is_inside(point1);
+	REQUIRE(a == false);
+	Vec2 point2{ 160.0f, 260.0f };
+	bool b = rect1.is_inside(point2);
+	REQUIRE(b == true);
 }
 
 	
@@ -222,4 +246,6 @@ int main(int argc, char *argv[])
 {
 
   return Catch::Session().run(argc, argv);
+
 }
+
