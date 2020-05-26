@@ -43,3 +43,15 @@ void Circle::draw(Window const& win, float thickness) const {
 		start_point = end_point;
 	}
 }
+
+bool Circle::is_inside(Vec2 const& point) const{
+	Vec2 connection{ point.x - center_.x, point.y - center_.y }; //between point and center(connectionvector)
+	if (pow(connection.x, 2) + pow(connection.y, 2) < pow(radius_, 2)) {
+
+		return true;
+	}
+
+	else return false;
+
+
+}
