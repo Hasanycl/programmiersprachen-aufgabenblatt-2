@@ -9,8 +9,9 @@ int main(int argc, char* argv[])
 {
   Window win{std::make_pair(800,800)};
 
-  Circle c5{ {400.0f,400.0f} , {90.0f }, { 0.5f , 0.3f , 0.4f }};
-  Rect rect1{ {300.0f , 300.0f}, {200.0f, 200.0f}, {0.2f, 0.2f, 0.4f} };
+  //old examples
+ // Circle c5{ {400.0f,400.0f} , {90.0f }, { 0.5f , 0.3f , 0.4f }};
+  //Rect rect1{ {300.0f , 300.0f}, {200.0f, 200.0f}, {0.2f, 0.2f, 0.4f} };
 
   while (!win.should_close()) {
     if (win.get_key(GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -56,8 +57,41 @@ int main(int argc, char* argv[])
     
     win.draw_text(text_offset_x, text_offset_y, font_size, display_text);
 
-    c5.draw(win);
-    rect1.draw(win);
+    //old examples
+    //c5.draw(win);
+   // rect1.draw(win);
+
+    Rect r1{ {50.0f,50.0f},{100.0f,100.0f}, {0.2f,0.2f,0.2f} };
+    Rect r2{ {300.0f,328.0f},{551.0f,502.0f}, {0.3f,0.8f,0.1f} };
+    Circle c1{ {158.0f,200.0f}, 45.0f, {0.3,0.7,0.9} };
+    Circle c2{ {390.0f,270.0f}, 72.0f, {0.3f,0.1f,0.3f} };
+
+    r1.draw(win, 1.2f);
+    r2.draw(win, 1.7f);
+
+    c1.draw(win, 0.2f);
+    c2.draw(win, 1.2f);
+
+    std::array<Circle, 2> myCircles{ c1, c2 };
+    std::array<Rect, 2> myRectangles{ r1, r2 };
+
+
+    for (Circle c : myCircles) {
+        if (c.is_inside({ (float)mouse_position.first,(float)mouse_position.second })) {
+
+            c.draw(win, 3.0f);
+        }
+        
+      }
+
+    for (Rect r : myRectangles) {
+
+        if (r.is_inside({ (float)mouse_position.first,(float)mouse_position.second })) {
+
+            r.draw(win, 3.0f);
+        }
+    }
+
 
     win.update();
   }
