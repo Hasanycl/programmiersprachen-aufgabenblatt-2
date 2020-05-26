@@ -16,12 +16,8 @@ Mat2& Mat2::operator*=(Mat2 const& m)
 
 Mat2 operator*(Mat2 const& m1, Mat2 const& m2)
 {
-	Mat2 temp;
-
-	temp.e_00 = m1.e_00 * m2.e_00 + m1.e_10 * m2.e_01;
-	temp.e_10 = m1.e_00 * m2.e_10 + m1.e_10 * m2.e_11;
-	temp.e_01 = m1.e_01 * m2.e_00 + m1.e_11 * m2.e_01;
-	temp.e_11 = m1.e_01 * m2.e_10 + m1.e_11 * m2.e_11;
+	Mat2 temp{ m1 };
+	temp *= m2;
 
 	return temp;
 }
@@ -63,7 +59,6 @@ Mat2 transpose(Mat2 const& m)
 
 Mat2 make_rotation_mat2(float phi)
 {
-
 	Mat2 rotation_mat;
 	float degree = phi * (180 / M_PI);
 	rotation_mat.e_00 = cos(degree);
@@ -71,5 +66,4 @@ Mat2 make_rotation_mat2(float phi)
 	rotation_mat.e_01 = sin(degree);
 	rotation_mat.e_11 = cos(degree);
 	return rotation_mat;
-
 }
