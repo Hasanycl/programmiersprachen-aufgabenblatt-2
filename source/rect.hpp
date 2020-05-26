@@ -21,6 +21,7 @@ class Rect
 		float circumference_rect () const;
 
 		void draw(Window const& win) const;
+		void draw(Window const& win, float thickness) const;
 
 };
 
