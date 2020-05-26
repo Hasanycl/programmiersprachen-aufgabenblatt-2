@@ -20,7 +20,7 @@ class Circle
 
 		 float circumference() const ;
 		 void draw(Window const& win) const;
-
+		 void draw(Window const& win, float thickness) const;
 
 
 };
